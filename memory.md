@@ -3,32 +3,46 @@
 ## Last Updated: 2026-07-13
 
 ## Completed
-- [x] GitHub repo created: https://github.com/slnkaxay-source/hisab
+- [x] GitHub repo created & public: https://github.com/slnkaxay-source/hisab
+- [x] GitHub Pages enabled: https://slnkaxay-source.github.io/hisab/
 - [x] Project structure set up
-- [x] Supabase database schema (supabase-schema.sql)
-- [x] Landing page (index.html)
+- [x] Supabase database schema applied (profiles, contacts, debt_requests, notifications)
+- [x] RLS policies configured in schema
+- [x] Landing page (index.html) - Hero, Features, Why, FAQ, Contact
 - [x] Auth pages (login.html, signup.html, forgot-password.html)
-- [x] Dashboard shell (dashboard.html)
-- [x] Core JavaScript API modules
-  - auth.js, profiles.js, debtRequests.js, contacts.js, notifications.js
-- [x] Utility modules (helpers.js, ui.js, router.js)
-- [x] Dashboard pages (dashboard.js, friends.js, requests.js, notifications.js, profile.js)
-- [x] Global CSS (style.css, landing.css, auth.css, dashboard.css)
+- [x] Dashboard shell (dashboard.html) - sidebar, bottom nav, top bar
+- [x] Core JavaScript API modules (auth, profiles, debtRequests, contacts, notifications)
+- [x] Utility modules (helpers.js, ui.js - toast, loading, confirm dialog)
+- [x] Dashboard page (cards: receive/pay/pending/friends/accepted/unread + quick actions + activity)
+- [x] Friends page (add/search/delete contacts, badge for registered/unregistered)
+- [x] Requests page (create/sent/received tabs, accept/reject with confirm dialogs)
+- [x] Notifications page (list with type icons, mark read, mark all read)
+- [x] Profile page (view/edit name, email, member since, logout)
+- [x] Global CSS with design system (variables, utilities, responsive)
+- [x] Landing, auth, dashboard specific CSS
+- [x] Config updated with Supabase URL + anon key
+
+## In Progress
+- [ ] Maileroo SMTP config in Supabase Auth settings (user doing)
 
 ## Pending
-- [ ] Set up Supabase project and get URL + anon key
-- [ ] Run supabase-schema.sql in Supabase SQL Editor
-- [ ] Configure Supabase Auth (Maileroo SMTP)
-- [ ] Configure RLS policies (already in schema)
-- [ ] Update src/js/config.js with Supabase credentials
-- [ ] Deploy to GitHub Pages
-- [ ] Test full auth flow
-- [ ] Test debt request flow
+- [ ] Create Supabase Edge Functions for sending application emails via Maileroo API
+- [ ] Link unregistered debt requests when user signs up (trigger function)
+- [ ] Test full auth flow with email verification
+- [ ] Test debt request flow (create, accept, reject)
 - [ ] Test notification system
+- [ ] Dark mode implementation
+- [ ] Add skeleton loading to all pages
+- [ ] Profile picture upload (Supabase Storage)
 
-## Notes
-- Frontend: Vanilla JS ES6 Modules, hosted on GitHub Pages
-- Backend: Supabase (Auth, PostgreSQL, Edge Functions)
-- Auth: Supabase Auth with Maileroo SMTP
-- No framework dependencies, pure HTML/CSS/JS
-- Config needs SUPABASE_URL and SUPABASE_ANON_KEY to work
+## Config
+- Supabase URL: https://gudpgpaygwdccducbdnu.supabase.co
+- Supabase Anon Key: set in config.js
+- Maileroo Domain: hisab.maileroo.app
+- Maileroo API Key: provided
+- SMTP: hello@hisab.maileroo.app (user configuring in dashboard)
+
+## Repo
+- URL: https://github.com/slnkaxay-source/hisab
+- Pages: https://slnkaxay-source.github.io/hisab/
+- Branch: master
