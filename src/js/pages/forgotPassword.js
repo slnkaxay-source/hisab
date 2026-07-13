@@ -1,4 +1,5 @@
 import { resetPassword } from '../api/auth.js';
+import { supabase } from '../api/supabase.js';
 import { showToast, showLoading } from '../utils/ui.js';
 
 const form = document.getElementById('forgotPasswordForm');
@@ -18,6 +19,11 @@ form.addEventListener('submit', async (e) => {
     emailError.textContent = 'Email is required';
     emailError.classList.add('visible');
     emailInput.classList.add('error');
+    return;
+  }
+
+  if (!supabase) {
+    showToast('Supabase not configured.', 'error');
     return;
   }
 
