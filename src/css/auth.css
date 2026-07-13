@@ -243,10 +243,11 @@
 
 .otp-input {
   text-align: center;
-  font-size: 1.75rem !important;
-  letter-spacing: 8px;
+  font-size: 1.5rem !important;
+  letter-spacing: 10px;
   font-weight: 700;
   padding: 16px !important;
+  font-family: 'Courier New', monospace;
 }
 
 @media (max-width: 480px) {

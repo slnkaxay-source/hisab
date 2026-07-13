@@ -22,8 +22,8 @@ form.addEventListener('submit', async (e) => {
   otpInput.classList.remove('error');
 
   const otp = otpInput.value.trim();
-  if (!otp || otp.length < 6) {
-    otpError.textContent = 'Please enter the 6-digit code';
+  if (!otp || otp.length < 8) {
+    otpError.textContent = 'Please enter the 8-digit code';
     otpError.classList.add('visible');
     otpInput.classList.add('error');
     return;
