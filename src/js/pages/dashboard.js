@@ -221,6 +221,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.querySelectorAll('.nav-item[data-page]').forEach(item => {
     item.addEventListener('click', (e) => {
       e.preventDefault();
+      document.getElementById('sidebar')?.classList.remove('open');
       navigateTo(item.dataset.page);
     });
   });
@@ -247,6 +248,14 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   document.getElementById('sidebarToggle')?.addEventListener('click', () => {
     document.getElementById('sidebar')?.classList.toggle('open');
+  });
+
+  document.addEventListener('click', (e) => {
+    const sidebar = document.getElementById('sidebar');
+    const toggle = document.getElementById('sidebarToggle');
+    if (sidebar?.classList.contains('open') && !sidebar.contains(e.target) && !toggle?.contains(e.target)) {
+      sidebar.classList.remove('open');
+    }
   });
 
   if (!supabase) {

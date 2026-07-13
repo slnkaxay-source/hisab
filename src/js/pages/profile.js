@@ -3,15 +3,14 @@ import { getCurrentUser, signOut } from '../api/auth.js';
 import { showToast, showConfirmDialog } from '../utils/ui.js';
 
 export async function renderProfileView(currentUser) {
-  const { data: profile, error } = await getProfile(currentUser.id);
+  let profile = null;
+  try {
+    const res = await getProfile(currentUser.id);
+    if (res.data) profile = res.data;
+  } catch (e) {}
 
-  if (error) {
-    showToast('Failed to load profile', 'error');
-    return;
-  }
-
-  const fullName = profile?.full_name || '';
-  const email = profile?.email || currentUser.email || '';
+  const fullName = profile?.full_name || currentUser.user_metadata?.full_name || '';
+  const email = currentUser.email || profile?.email || '';
   const createdAt = profile?.created_at || currentUser.created_at || new Date().toISOString();
 
   const container = document.getElementById('page-content');
