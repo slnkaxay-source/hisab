@@ -95,7 +95,8 @@ export async function renderRequestsView(currentUser) {
     });
 
     if (error) {
-      showToast('Failed to create request', 'error');
+      showToast(error.message || 'Failed to create request', 'error');
+      console.error('Create request error:', error);
       return;
     }
 

@@ -30,11 +30,9 @@ export async function updateProfile(userId, updates) {
 export async function getProfileByEmail(email) {
   try {
     const { data, error } = await supabase
-      .from('profiles')
-      .select('*')
-      .eq('email', email)
-      .maybeSingle();
-    return { data, error };
+      .rpc('lookup_user_by_email', { email_to_find: email });
+    if (error) return { data: null, error };
+    return { data: data?.[0] || null, error: null };
   } catch (error) {
     return { data: null, error };
   }
