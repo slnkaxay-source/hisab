@@ -127,8 +127,9 @@ form.addEventListener('submit', async (e) => {
     return;
   }
 
-  showToast('Verification email sent! Check your inbox.', 'success');
+  localStorage.setItem('hisab_pending_email', emailInput.value.trim());
+  showToast('Verification code sent!', 'success');
   setTimeout(() => {
-    window.location.href = 'login.html';
-  }, 2000);
+    window.location.href = 'verify-otp.html';
+  }, 1500);
 });

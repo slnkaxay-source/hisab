@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verify Email - Hisab</title>
+  <link rel="stylesheet" href="src/css/style.css">
+  <link rel="stylesheet" href="src/css/auth.css">
+</head>
+<body>
+  <main class="auth-page">
+    <div class="auth-card">
+      <div class="auth-logo">
+        <h1>Hisab</h1>
+      </div>
+      <h2 class="auth-title">Verify Your Email</h2>
+      <p class="auth-subtitle">Enter the 6-digit code sent to your email</p>
+
+      <form id="verifyForm">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" class="form-input" readonly>
+        </div>
+        <div class="form-group">
+          <label for="otp">Verification Code</label>
+          <input type="text" id="otp" class="form-input otp-input" placeholder="000000" maxlength="6" inputmode="numeric" autocomplete="one-time-code">
+          <div class="field-error" id="otpError"></div>
+        </div>
+        <button type="submit" class="auth-button" id="submitBtn">Verify Email</button>
+      </form>
+
+      <div class="auth-links" style="margin-top: 1.25rem;">
+        Didn't receive code? <a href="#" id="resendLink">Resend</a>
+      </div>
+      <div class="auth-links">
+        <a href="login.html">Back to Login</a>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script type="module" src="src/js/pages/verifyOtp.js"></script>
+</body>
+</html>
