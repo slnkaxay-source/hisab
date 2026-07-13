@@ -218,14 +218,6 @@ export async function handleLogout() {
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
-  if (!supabase) {
-    document.getElementById('page-content').innerHTML = '<div class="empty-state" style="padding:3rem;text-align:center"><div class="empty-state-icon">⚠️</div><div class="empty-state-text">Supabase not connected</div><div class="empty-state-sub">Please check your configuration</div></div>';
-    return;
-  }
-
-  const authed = await checkAuth();
-  if (!authed) return;
-
   document.querySelectorAll('.nav-item[data-page]').forEach(item => {
     item.addEventListener('click', (e) => {
       e.preventDefault();
@@ -256,6 +248,19 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('sidebarToggle')?.addEventListener('click', () => {
     document.getElementById('sidebar')?.classList.toggle('open');
   });
+
+  if (!supabase) {
+    document.getElementById('page-content').innerHTML = '<div class="empty-state" style="padding:3rem;text-align:center"><div class="empty-state-icon">⚠️</div><div class="empty-state-text">Supabase not connected</div><div class="empty-state-sub">Check config or refresh</div></div>';
+    return;
+  }
+
+  const { data: sessionData } = await getSession();
+  if (!sessionData?.session) {
+    window.location.href = 'login.html';
+    return;
+  }
+  currentSession = sessionData.session;
+  currentUser = sessionData.session.user;
 
   navigateTo('dashboard');
 });
