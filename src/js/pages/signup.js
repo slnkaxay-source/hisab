@@ -1,4 +1,5 @@
 import { signUp } from '../api/auth.js';
+import { supabase } from '../api/supabase.js';
 import { showToast, showLoading } from '../utils/ui.js';
 
 const form = document.getElementById('signupForm');
@@ -108,6 +109,11 @@ form.addEventListener('submit', async (e) => {
 
   if (!valid) return;
 
+  if (!supabase) {
+    showToast('Supabase not configured. Please check config.', 'error');
+    return;
+  }
+
   submitBtn.disabled = true;
   showLoading(true);
 
@@ -117,12 +123,12 @@ form.addEventListener('submit', async (e) => {
   submitBtn.disabled = false;
 
   if (error) {
-    showToast(error.message || 'Something went wrong');
+    showToast(error.message || 'Something went wrong', 'error');
     return;
   }
 
-  showToast('Verification email sent', 'success');
+  showToast('Verification email sent! Check your inbox.', 'success');
   setTimeout(() => {
     window.location.href = 'login.html';
-  }, 1500);
+  }, 2000);
 });
