@@ -31,6 +31,53 @@ export function showToast(message, type = 'error') {
   }, 4000);
 }
 
+export function showConfirmDialog(title, message) {
+  return new Promise((resolve) => {
+    const overlay = document.createElement('div');
+    overlay.className = 'modal-overlay';
+    Object.assign(overlay.style, {
+      position: 'fixed', inset: '0', background: 'rgba(0,0,0,0.5)',
+      display: 'flex', alignItems: 'center', justifyContent: 'center',
+      zIndex: '99999', padding: '1rem'
+    });
+
+    const content = document.createElement('div');
+    Object.assign(content.style, {
+      background: '#fff', borderRadius: '12px', padding: '1.5rem',
+      maxWidth: '400px', width: '100%', boxShadow: '0 20px 60px rgba(0,0,0,0.3)'
+    });
+
+    content.innerHTML = `
+      <h3 style="margin:0 0 0.5rem;font-size:1.125rem">${title}</h3>
+      <p style="margin:0 0 1.25rem;color:#64748b;font-size:0.875rem">${message}</p>
+      <div style="display:flex;gap:0.75rem;justify-content:flex-end">
+        <button class="btn btn-outline btn-sm" id="confirm-cancel">Cancel</button>
+        <button class="btn btn-primary btn-sm" id="confirm-ok">Confirm</button>
+      </div>
+    `;
+
+    overlay.appendChild(content);
+    document.body.appendChild(overlay);
+
+    overlay.querySelector('#confirm-cancel').addEventListener('click', () => {
+      document.body.removeChild(overlay);
+      resolve(false);
+    });
+
+    overlay.querySelector('#confirm-ok').addEventListener('click', () => {
+      document.body.removeChild(overlay);
+      resolve(true);
+    });
+
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) {
+        document.body.removeChild(overlay);
+        resolve(false);
+      }
+    });
+  });
+}
+
 export function showLoading(show) {
   const existing = document.querySelector('.loading-overlay');
   if (show) {
