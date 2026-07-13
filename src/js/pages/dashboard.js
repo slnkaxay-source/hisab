@@ -147,7 +147,8 @@ export async function renderDashboard() {
       });
     });
   } catch (err) {
-    showToast('Failed to load dashboard', 'error');
+    console.error('Dashboard error:', err);
+    document.getElementById('page-content').innerHTML = '<div class="empty-state" style="padding:3rem;text-align:center"><div class="empty-state-icon">⚠️</div><div class="empty-state-text">Failed to load dashboard</div><div class="empty-state-sub">' + err.message + '</div></div>';
   } finally {
     showLoading(false);
   }
@@ -217,6 +218,11 @@ export async function handleLogout() {
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
+  if (!supabase) {
+    document.getElementById('page-content').innerHTML = '<div class="empty-state" style="padding:3rem;text-align:center"><div class="empty-state-icon">⚠️</div><div class="empty-state-text">Supabase not connected</div><div class="empty-state-sub">Please check your configuration</div></div>';
+    return;
+  }
+
   const authed = await checkAuth();
   if (!authed) return;
 
